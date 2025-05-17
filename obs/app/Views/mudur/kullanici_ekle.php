@@ -6,6 +6,15 @@
 </head>
 <body class="container mt-5">
     <h2>Kullanıcı Ekle</h2>
+
+    <?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
+
+
+
     <form action="<?= base_url('mudur/kullanici-kaydet') ?>" method="post">
 
         <div class="mb-3">
@@ -35,8 +44,18 @@
         <div class="mb-3" id="ogrenciFields" style="display:none;">
             <label>Öğrenci No:</label>
             <input type="text" name="student_no" class="form-control" value="<?= isset($nextStudentNo) ? $nextStudentNo : '' ?>">
-            <label>Sınıf:</label>
-            <input type="text" name="class" class="form-control">
+            <?php if ($role === 'ogrenci'): ?>
+                <div class="mb-3">
+                    <label>Sınıf:</label>
+                    <select name="class_id" class="form-control" >
+                        <option value="">Sınıf Seçiniz</option>
+                        <?php foreach ($classes as $c): ?>
+                            <option value="<?= $c['id'] ?>"><?= esc($c['class_name']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            <?php endif; ?>
+
         </div>
 
         <div class="mb-3" id="ogretmenFields" style="display:none;">

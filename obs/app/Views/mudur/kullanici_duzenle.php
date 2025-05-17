@@ -29,7 +29,14 @@
             </div>
             <div class="mb-3">
                 <label>Sınıf:</label>
-                <input type="text" name="class" class="form-control" value="<?= esc($detay['class']) ?>">
+                <select name="class_id" class="form-control" required>
+    <option value="">Sınıf Seçiniz</option>
+    <?php foreach ($classes as $c): ?>
+        <option value="<?= $c['id'] ?>" <?= $detay['class_id'] == $c['id'] ? 'selected' : '' ?>>
+            <?= esc($c['class_name']) ?>
+        </option>
+    <?php endforeach; ?>
+</select>
             </div>
         <?php elseif ($user['role'] == 'ogretmen'): ?>
             <div class="mb-3">

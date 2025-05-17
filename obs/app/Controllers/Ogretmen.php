@@ -12,7 +12,12 @@ class Ogretmen extends BaseController
     {
         requireLogin('ogretmen');
         $studentModel = new StudentModel();
-        $students = $studentModel->findAll();
+        $students = $studentModel
+
+        ->select('students.*, classes.class_name')
+        ->join('classes', 'classes.id = students.class_id')
+        
+        ->findAll();
 
         return view('ogretmen/dashboard', ['students' => $students]);
     }
@@ -83,6 +88,17 @@ public function devamsizlikKaydet()
 {
     requireLogin('ogretmen');
     $absenceModel = new \App\Models\AbsenceModel();
+
+        $date = $this->request->getPost('date');
+
+if (empty($date)) {
+    return redirect()->back()->with('error', 'Tarih boş olamaz.');
+}
+        $type = $this->request->getPost('type');
+
+if (empty($type)) {
+    return redirect()->back()->with('error', 'Devamsızlık Türü boş olamaz.');
+}
 
     $absenceModel->insert([
         'student_id' => $this->request->getPost('student_id'),

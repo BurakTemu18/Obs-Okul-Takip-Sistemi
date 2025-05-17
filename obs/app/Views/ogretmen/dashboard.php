@@ -23,7 +23,7 @@
                 <tr>
                     <td><?= esc($student['name']) ?></td>
                     <td><?= esc($student['student_no']) ?></td>
-                    <td><?= esc($student['class']) ?></td>
+                    <td><?= esc($student['class_name']) ?></td>
                     <td>
                         
                         <a href="<?= base_url('ogretmen/not-ekle/'.$student['id']) ?>" class="btn btn-sm btn-primary">Not Ekle</a>

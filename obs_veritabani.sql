@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 17 May 2025, 09:59:59
+-- Üretim Zamanı: 17 May 2025, 18:53:41
 -- Sunucu sürümü: 10.4.32-MariaDB
 -- PHP Sürümü: 8.2.12
 
@@ -40,28 +40,27 @@ CREATE TABLE `absences` (
 
 INSERT INTO `absences` (`id`, `student_id`, `date`, `type`) VALUES
 (3, 3, '2025-01-01', 'tam'),
-(6, 8, '2025-05-10', 'yarim'),
-(8, 10, '2025-05-11', 'tam'),
-(11, 10, '2025-05-11', 'ozurlu'),
-(15, 10, '2025-05-17', 'tam');
+(16, 21, '2025-05-19', 'yarim'),
+(17, 3, '0000-00-00', 'yarim');
 
 -- --------------------------------------------------------
 
 --
--- Tablo için tablo yapısı `class`
+-- Tablo için tablo yapısı `classes`
 --
 
-CREATE TABLE `class` (
+CREATE TABLE `classes` (
   `id` int(11) NOT NULL,
   `class_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Tablo döküm verisi `class`
+-- Tablo döküm verisi `classes`
 --
 
-INSERT INTO `class` (`id`, `class_name`) VALUES
-(1, '4-B');
+INSERT INTO `classes` (`id`, `class_name`) VALUES
+(1, '4-B'),
+(6, '5-C');
 
 -- --------------------------------------------------------
 
@@ -85,11 +84,8 @@ CREATE TABLE `grades` (
 --
 
 INSERT INTO `grades` (`id`, `student_id`, `subject`, `exam1`, `exam2`, `performance`, `teacher_id`) VALUES
-(12, 8, 'Türkçe', 33, 27, 82, 8),
-(14, 10, 'Türkçe', 100, 50, 50, 8),
-(19, 10, 'Fizik', 50, 20, 15, 8),
-(20, 10, 'Kimya', 70, 50, NULL, 8),
-(27, 3, 'Türkçe', 50, 50, 50, 8);
+(27, 3, 'Türkçe', 50, 50, 50, 8),
+(29, 21, 'Türkçe', 4, 4, 4, 8);
 
 -- --------------------------------------------------------
 
@@ -112,8 +108,8 @@ CREATE TABLE `students` (
 
 INSERT INTO `students` (`id`, `user_id`, `name`, `student_no`, `class`, `class_id`) VALUES
 (3, 8, 'Öğrenci 1', '100', '1-B', 1),
-(8, 13, 'Öğrenci 2', '105', '1-C', NULL),
-(10, 22, 'Ögrenci 3 ', '106', '1-A', NULL);
+(21, 45, 'Öğrenci 2', '101', '', 6),
+(22, 46, 'Öğrenci 3', '102', '', 6);
 
 -- --------------------------------------------------------
 
@@ -156,9 +152,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `created_at`) VALUES
 (1, 'burak', '$2y$10$vnn2omE7OskEZKvJLo4SuO5EZ7Hzmxw4V6OpZgs3YLAEpBRJGLmIC', 'mudur', '2025-05-17 00:52:11'),
 (8, 'ör1', '$2y$10$W0BDLC27xX0ktV2DFsPKd./TJPUnlDnp3QJGc4DhqVyv5IkeIMEwO', 'ogrenci', '2025-05-17 00:52:11'),
-(13, 'ör2', '$2y$10$H1fFpp.LriAzb.37Npr.I.IIM6P6qipNUEiIi0wXd6LwI/DG7Scty', 'ogrenci', '2025-05-17 00:52:11'),
 (17, 'ögr1', '$2y$10$QBafEtFS3SAPUL9QkpLQAufz3modQs0S974aJDxMTIPlxvnxE6vFm', 'ogretmen', '2025-05-17 00:52:11'),
-(22, 'ör3', '$2y$10$g8QiuQFHhvcgenVwxHNBp.oYJ9eKVzh4efnks5FLb/BZsoHoTbWdG', 'ogrenci', '2025-05-17 00:52:11');
+(45, 'ög2', '$2y$10$CliiqoROEYMEItde6D1/Wu0WrBW7cHF/8Gs1Yfz073JKAEGYIS7eO', 'ogrenci', '2025-05-17 13:03:32'),
+(46, 'ög3', '$2y$10$urujfZqDTdT2DWMDqnijaeAx8Zo40.y2f8mNRZKW0g27s.sT3ksCy', 'ogrenci', '2025-05-17 13:05:24');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -172,9 +168,9 @@ ALTER TABLE `absences`
   ADD KEY `student_id` (`student_id`);
 
 --
--- Tablo için indeksler `class`
+-- Tablo için indeksler `classes`
 --
-ALTER TABLE `class`
+ALTER TABLE `classes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -215,37 +211,37 @@ ALTER TABLE `users`
 -- Tablo için AUTO_INCREMENT değeri `absences`
 --
 ALTER TABLE `absences`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- Tablo için AUTO_INCREMENT değeri `class`
+-- Tablo için AUTO_INCREMENT değeri `classes`
 --
-ALTER TABLE `class`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `classes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar

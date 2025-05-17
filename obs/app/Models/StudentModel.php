@@ -5,5 +5,5 @@ use CodeIgniter\Model;
 class StudentModel extends Model
 {
     protected $table = 'students';
-    protected $allowedFields = ['user_id', 'name', 'student_no', 'class'];
+    protected $allowedFields = ['user_id', 'name', 'student_no', 'class','class_id'];
 }

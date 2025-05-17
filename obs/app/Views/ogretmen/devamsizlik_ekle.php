@@ -7,6 +7,13 @@
 <body class="container mt-5">
     <h2>Devamsızlık Ekle - <?= esc($student['name']) ?></h2>
 
+
+        <?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
+
     <form action="<?= base_url('ogretmen/devamsizlik-kaydet') ?>" method="post">
         <input type="hidden" name="student_id" value="<?= $student['id'] ?>">
 

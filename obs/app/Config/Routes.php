@@ -28,8 +28,8 @@ $routes->post('/mudur/kullanici-guncelle/(:num)', 'Mudur::kullaniciGuncelle/$1')
 $routes->get('/mudur/not-silm/(:num)', 'Mudur::notSilm/$1');
 $routes->get('/mudur/devamsizlik-silm/(:num)', 'Mudur::devamsizlikSilm/$1');
 
-$routes->get('/mudur/siniflar', 'Mudur::siniflar');
-$routes->get('/mudur/sinif/(:segment)', 'Mudur::sinifDetay/$1');
+
+
 
 $routes->get('/ogretmen/not-ekle/(:num)', 'Ogretmen::notEkle/$1');
 $routes->post('/ogretmen/not-kaydet', 'Ogretmen::notKaydet');
@@ -43,5 +43,12 @@ $routes->get('/ogrenci/dashboard', 'Ogrenci::dashboard');
 $routes->get('/ogretmen/ogrenci/(:num)', 'Ogretmen::ogrenciBilgi/$1');
 $routes->get('/ogretmen/not-sil/(:num)', 'Ogretmen::notSil/$1');
 $routes->get('/ogretmen/devamsizlik-sil/(:num)', 'Ogretmen::devamsizlikSil/$1');
+
+$routes->get('/mudur/siniflar', 'Mudur::sinifListele');
+$routes->post('/mudur/sinif-ekle', 'Mudur::sinifEkle');
+$routes->get('/mudur/sinif-sil/(:num)', 'Mudur::sinifSil/$1');
+$routes->get('/mudur/sinif/(:num)', 'Mudur::sinifDetay/$1');
+
+
 
 
