@@ -378,4 +378,32 @@ public function sinifDetay($id)
     ]);
 }
 
+public function ogrenciDetay($id)
+{
+    requireLogin('mudur');
+
+    $studentModel = new \App\Models\StudentModel();
+    $gradeModel = new \App\Models\GradeModel();
+    $absenceModel = new \App\Models\AbsenceModel();
+    $classModel = new \App\Models\ClassModel();
+
+    $ogrenci = $studentModel->find($id);
+
+    if (!$ogrenci) {
+        return redirect()->back()->with('error', 'Öğrenci bulunamadı.');
+    }
+
+    $grades = $gradeModel->where('student_id', $id)->findAll();
+    $devamsizliklar = $absenceModel->where('student_id', $id)->findAll();
+
+    $class = $classModel->find($ogrenci['class_id']);
+
+    return view('mudur/ogrenci_detay', [
+        'ogrenci' => $ogrenci,
+        'grades' => $grades,
+        'devamsizliklar' => $devamsizliklar,
+        'class' => $class
+    ]);
+}
+
 }

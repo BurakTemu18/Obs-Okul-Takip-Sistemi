@@ -2,7 +2,7 @@
 <html>
 <head>
     <title><?= esc($class['class_name']) ?> Sınıfı</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/obs/assets/still.css">
 </head>
 <body class="container mt-4">
 
@@ -16,23 +16,22 @@
         <tr>
             <th>Ad Soyad</th>
             <th>Öğrenci No</th>
-            <th>1.Sınav</th>
-            <th>2.Sınav</th>
-            <th>Performans Notu</th>
-            <th>Ortalama Not</th>
-            <th>Devamsızlık Sayısı</th>
+           
         </tr>
     </thead>
     <tbody>
         <?php foreach ($data as $row): ?>
             <tr>
-                <td><?= esc($row['ogrenci']['name']) ?></td>
-                <td><?= esc($row['ogrenci']['student_no']) ?></td>
-                <td><?= $row['exam1'] !== null ? $row['exam1'] : '—' ?></td>
-                <td><?= $row['exam2'] !== null ? $row['exam2'] : '—' ?></td>
-                <td><?= $row['performance'] !== null ? $row['performance'] : '—' ?></td>
-                <td><?= $row['ortalama'] !== null ? number_format($row['ortalama'], 2) : '—' ?></td>
-                <td><?= $row['devamsizlik'] ?></td>
+                <tr>
+    <td>
+        <a class="btn btn-primary mt-3" href="<?= base_url('mudur/ogrenci/' . $row['ogrenci']['id']) ?>">
+            <?= esc($row['ogrenci']['name']) ?>
+        </a>
+    </td>
+    <td><?= esc($row['ogrenci']['student_no']) ?></td>
+</tr>
+                
+ 
             </tr>
         <?php endforeach; ?>
     </tbody>

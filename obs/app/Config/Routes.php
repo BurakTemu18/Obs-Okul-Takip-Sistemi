@@ -49,6 +49,8 @@ $routes->post('/mudur/sinif-ekle', 'Mudur::sinifEkle');
 $routes->get('/mudur/sinif-sil/(:num)', 'Mudur::sinifSil/$1');
 $routes->get('/mudur/sinif/(:num)', 'Mudur::sinifDetay/$1');
 
+$routes->get('/mudur/ogrenci/(:num)', 'Mudur::ogrenciDetay/$1');
+
 
 
 
