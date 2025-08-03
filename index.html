@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= esc($settings['salon_name'] ?? 'Kuaför Salonu') ?></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.3.0/dist/flowbite.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#fdf4ff',
+                            100: '#fae8ff',
+                            200: '#f5d0fe',
+                            300: '#f0abfc',
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            800: '#86198f',
+                            900: '#701a75',
+                        },
+                        accent: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-down': 'fadeInDown 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'gradient-shift': 'gradientShift 3s ease-in-out infinite',
+                        'scale-in': 'scaleIn 0.5s ease-out',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'bounce-in': 'bounceIn 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        bounceIn: {
+                            '0%': { transform: 'scale(0.3)', opacity: '0' },
+                            '50%': { transform: 'scale(1.05)' },
+                            '70%': { transform: 'scale(0.9)' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        bounceGentle: {
+                            '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
+                            '40%': { transform: 'translateY(-15px)' },
+                            '60%': { transform: 'translateY(-8px)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-20px) rotate(1deg)' },
+                            '66%': { transform: 'translateY(-10px) rotate(-1deg)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
+                            '50%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.8)' }
+                        },
+                        gradientShift: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' }
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' }
+                        }
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-dark {
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hover-lift {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .hover-lift:hover {
+                transform: translateY(-4px) scale(1.01);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+        }
+
+        @media (max-width: 768px) {
+            .service-card:hover {
+                transform: translateY(-3px) scale(1.01);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        .team-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px) rotateY(3deg);
+        }
+
+        @media (max-width: 768px) {
+            .team-card:hover {
+                transform: translateY(-4px) rotateY(0deg);
+            }
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(2) {
+            animation-delay: -2s;
+        }
+
+        .floating-element:nth-child(3) {
+            animation-delay: -4s;
+        }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .btn-gradient:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            }
+        }
+
+        .modal-backdrop {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+
+        .step-indicator.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: scale(1.1);
+        }
+
+        .selection-card {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+            backdrop-filter: blur(10px);
+        }
+
+        .selection-card:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .selection-card.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Mobile-specific improvements */
+        @media (max-width: 768px) {
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+            
+            .glass-effect {
+                backdrop-filter: blur(15px);
+                background: rgba(255, 255, 255, 0.15);
+            }
+            
+            .floating-element {
+                display: none;
+            }
+            
+            .hero-content {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            .modal-content {
+                margin: 0.5rem;
+                max-height: calc(100vh - 1rem);
+                border-radius: 1.5rem;
+            }
+            
+            .modal-header {
+                position: sticky;
+                top: 0;
+                background: white;
+                z-index: 10;
+                border-radius: 1.5rem 1.5rem 0 0;
+            }
+            
+            .step-indicators-mobile {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+                margin: 1rem 0;
+            }
+            
+            .step-indicator-mobile {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.875rem;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Enhanced mobile modal styles */
+        .mobile-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 0;
+        }
+
+        .mobile-modal-content {
+            background: white;
+            width: 100%;
+            max-height: 90vh;
+            border-radius: 1.5rem 1.5rem 0 0;
+            overflow: hidden;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+            animation: slide-up 0.3s ease-out forwards;
+        }
+
+        .query-result-mobile {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Touch-friendly buttons */
+        .touch-button {
+            min-height: 3rem;
+            min-width: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 1rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .touch-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Improved input styles for mobile */
+        .mobile-input {
+            font-size: 16px; /* Prevents zoom on iOS */
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .text-responsive {
+                font-size: clamp(1.5rem, 4vw, 3rem);
+            }
+            
+            .hero-title {
+                font-size: clamp(2rem, 8vw, 4rem);
+                line-height: 1.1;
+            }
+            
+            .btn-responsive {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-inter">
+    <!-- Header/Navigation -->
+    <nav class="fixed top-0 w-full glass-effect z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 lg:px-8 py-3 md:py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3 md:space-x-4 animate-slide-in-left">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg">
+                        <i class="fas fa-cut text-white text-lg md:text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg md:text-xl lg:text-2xl font-bold text-white"><?= esc($settings['salon_name']) ?></h1>
+                        <p class="text-xs md:text-sm text-white/80 hidden sm:block">Profesyonel Kuaförlük</p>
+                    </div>
+                </div>
+                <button data-modal-target="rezervasyonModal" data-modal-toggle="rezervasyonModal"
+                    class="btn-gradient text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl md:rounded-2xl text-sm md:text-base font-semibold shadow-lg animate-slide-in-right touch-button">
+                    <i class="fas fa-calendar-plus mr-1 md:mr-2"></i>
+                    <span class="hidden sm:inline">Randevu Al</span>
+                    <span class="sm:hidden">Randevu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center gradient-bg overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+
+        <!-- Floating Elements (Hidden on mobile) -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full floating-element"></div>
+        <div class="absolute bottom-32 right-16 w-16 h-16 bg-white/10 rounded-full floating-element"></div>
+        <div class="absolute top-1/2 left-1/4 w-12 h-12 bg-white/10 rounded-full floating-element"></div>
+        <div class="absolute top-1/3 right-1/3 w-8 h-8 bg-white/10 rounded-full floating-element"></div>
+
+        <div class="relative text-center text-white px-4 max-w-6xl mx-auto hero-content">
+            <div class="mb-6 md:mb-8 animate-fade-in-down">
+                <div class="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-white/10 rounded-full mb-4 md:mb-6 animate-bounce-gentle">
+                    <i class="fas fa-cut text-3xl md:text-4xl lg:text-6xl text-accent-400"></i>
+                </div>
+            </div>
+            
+            <h1 class="hero-title font-black mb-4 md:mb-6 animate-fade-in-up">
+                <span class="bg-gradient-to-r from-accent-300 via-white to-accent-300 bg-clip-text text-transparent">
+                    <?= esc($settings['salon_name']) ?>
+                </span>
+            </h1>
+            
+            <p class="text-base md:text-lg lg:text-2xl mb-6 md:mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed animate-fade-in-up px-4" style="animation-delay: 0.2s;">
+                Profesyonel kuaförlük hizmetleri ile tarzınızı yansıtın. Modern teknikler, deneyimli ekip.
+            </p>
+
+            <div class="flex flex-col space-y-4 mb-8 md:mb-12 text-sm md:text-base animate-fade-in-up" style="animation-delay: 0.4s;">
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-6">
+                    <div class="flex items-center glass-effect px-4 py-2.5 md:px-6 md:py-3 rounded-full">
+                        <i class="fas fa-map-marker-alt mr-2 md:mr-3 text-accent-400"></i>
+                        <span class="truncate max-w-xs"><?= esc($settings['address']) ?></span>
+                    </div>
+                    <div class="flex items-center glass-effect px-4 py-2.5 md:px-6 md:py-3 rounded-full">
+                        <i class="fas fa-phone mr-2 md:mr-3 text-accent-400"></i>
+                        <?= esc($settings['phone']) ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4 justify-center items-center animate-fade-in-up px-4" style="animation-delay: 0.6s;">
+                <button data-modal-target="rezervasyonModal" data-modal-toggle="rezervasyonModal"
+                    class="w-full md:w-auto inline-flex items-center justify-center px-6 md:px-8 py-3.5 md:py-4 bg-gradient-to-r from-accent-400 to-accent-600 text-gray-900 font-bold rounded-xl md:rounded-2xl text-base md:text-lg hover:from-accent-300 hover:to-accent-500 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-accent-500/25 touch-button">
+                    <i class="fas fa-calendar-check mr-2 md:mr-3"></i>
+                    Hemen Randevu Al
+                </button>
+                <button data-modal-target="sorguModal" data-modal-toggle="sorguModal"
+                    class="w-full md:w-auto inline-flex items-center justify-center px-6 md:px-8 py-3.5 md:py-4 glass-effect text-white font-bold rounded-xl md:rounded-2xl text-base md:text-lg hover:bg-white/20 transform hover:scale-105 transition-all duration-300 border border-white/30 touch-button">
+                    <i class="fas fa-search mr-2 md:mr-3"></i>
+                    Randevu Sorgula
+                </button>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator">
+            <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-white/70 rounded-full mt-2 animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-50/50 to-secondary-50/50"></div>
+        <div class="container mx-auto px-4 lg:px-8 relative">
+            <div class="text-center mb-12 md:mb-16 animate-fade-in-up">
+                <h2 class="text-2xl md:text-3xl lg:text-6xl font-black text-gray-800 mb-4 md:mb-6">
+                    <span class="text-gradient">Hizmetlerimiz</span>
+                </h2>
+                <p class="text-gray-600 text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4">
+                    Uzman kuaförlerimizle size özel hizmet sunuyoruz. Her detayda mükemmellik.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+                <?php foreach ($services as $index => $service): ?>
+                    <div class="service-card rounded-2xl md:rounded-3xl shadow-xl overflow-hidden animate-fade-in-up hover-lift" style="animation-delay: <?= $index * 0.1 ?>s;">
+                        <div class="h-40 md:h-48 lg:h-56 bg-gradient-to-br from-primary-400 via-secondary-400 to-accent-400 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-scissors text-3xl md:text-4xl lg:text-5xl text-white animate-wiggle"></i>
+                            </div>
+                            <div class="absolute top-3 right-3 md:top-4 md:right-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-clock text-white text-xs md:text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 md:p-6 lg:p-8 bg-white">
+                            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-gray-800 mb-2 md:mb-3"><?= esc($service['name']) ?></h3>
+                            <p class="text-gray-600 mb-4 md:mb-6 leading-relaxed text-sm md:text-base">Profesyonel <?= strtolower(esc($service['name'])) ?> hizmeti ile tarzınızı yansıtın</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-primary-600 font-semibold text-sm md:text-base">
+                                    <i class="fas fa-clock mr-1 md:mr-2"></i>
+                                    <span><?= $service['duration_minutes'] ?> dakika</span>
+                                </div>
+                                <button data-modal-target="rezervasyonModal" data-modal-toggle="rezervasyonModal"
+                                    class="btn-gradient text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg md:rounded-xl text-xs md:text-sm font-semibold shadow-lg touch-button">
+                                    Randevu Al
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-gray-100 to-gray-50 relative">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-12 md:mb-16 animate-fade-in-up">
+                <h2 class="text-2xl md:text-3xl lg:text-6xl font-black text-gray-800 mb-4 md:mb-6">
+                    <span class="text-gradient">Uzman Ekibimiz</span>
+                </h2>
+                <p class="text-gray-600 text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4">
+                    Deneyimli ve yaratıcı kuaförlerimizle tanışın. Her biri alanında uzman.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+                <?php foreach ($barbers as $index => $barber): ?>
+                    <?php if ($barber['is_active']): ?>
+                        <div class="team-card bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden hover-lift animate-fade-in-up" style="animation-delay: <?= $index * 0.1 ?>s;">
+                            <div class="h-48 md:h-64 lg:h-72 bg-gradient-to-br from-primary-400 via-secondary-400 to-accent-400 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-black/20"></div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-white/20 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user-tie text-2xl md:text-3xl lg:text-4xl text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4">
+                                    <div class="glass-effect rounded-xl md:rounded-2xl p-3 md:p-4">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-2.5 h-2.5 md:w-3 md:h-3 bg-green-400 rounded-full animate-pulse"></div>
+                                            <span class="text-white text-xs md:text-sm font-medium">Aktif</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 md:p-6 lg:p-8 text-center">
+                                <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-gray-800 mb-1 md:mb-2"><?= esc($barber['name']) ?></h3>
+                                <p class="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">Uzman Kuaför & Stilist</p>
+                                <button data-modal-target="rezervasyonModal" data-modal-toggle="rezervasyonModal"
+                                    class="btn-gradient text-white px-6 md:px-8 py-2.5 md:py-3 rounded-lg md:rounded-xl font-semibold shadow-lg w-full touch-button text-sm md:text-base">
+                                    <i class="fas fa-calendar-plus mr-1 md:mr-2"></i>
+                                    Randevu Al
+                                </button>
+                            </div>
+                        </div>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-12 md:py-16 lg:py-24 gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/30"></div>
+        
+        <!-- Floating Elements (Hidden on mobile) -->
+        <div class="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full floating-element"></div>
+        <div class="absolute bottom-10 right-10 w-24 h-24 bg-white/5 rounded-full floating-element"></div>
+        
+        <div class="relative container mx-auto px-4 lg:px-8 text-center text-white">
+            <div class="animate-fade-in-up">
+                <h2 class="text-2xl md:text-3xl lg:text-6xl font-black mb-4 md:mb-6">
+                    <span class="bg-gradient-to-r from-accent-300 to-white bg-clip-text text-transparent">
+                        Randevunuzu Hemen Alın!
+                    </span>
+                </h2>
+                <p class="text-base md:text-lg lg:text-xl mb-8 md:mb-12 max-w-3xl mx-auto text-white/90 leading-relaxed px-4">
+                    Profesyonel hizmet için bugün randevunuzu oluşturun. Size özel deneyim sizi bekliyor.
+                </p>
+
+                <div class="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-6 justify-center items-center px-4">
+                    <button data-modal-target="rezervasyonModal" data-modal-toggle="rezervasyonModal"
+                        class="w-full md:w-auto inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-accent-400 to-accent-600 text-gray-900 font-bold rounded-xl md:rounded-2xl text-base md:text-lg hover:from-accent-300 hover:to-accent-500 transform hover:scale-105 transition-all duration-300 shadow-2xl touch-button">
+                        <i class="fas fa-calendar-check mr-2 md:mr-3 text-lg md:text-xl"></i>
+                        Randevu Oluştur
+                    </button>
+
+                    <button data-modal-target="sorguModal" data-modal-toggle="sorguModal"
+                        class="w-full md:w-auto inline-flex items-center justify-center px-8 md:px-10 py-4 md:py-5 glass-effect text-white font-bold rounded-xl md:rounded-2xl text-base md:text-lg hover:bg-white/20 transform hover:scale-105 transition-all duration-300 border border-white/30 touch-button">
+                        <i class="fas fa-search mr-2 md:mr-3 text-lg md:text-xl"></i>
+                        Randevu Sorgula
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 md:py-16 lg:py-20">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-8 md:mb-12">
+                <div class="flex items-center justify-center space-x-3 md:space-x-4 mb-4 md:mb-6">
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl md:rounded-3xl flex items-center justify-center shadow-xl">
+                        <i class="fas fa-cut text-white text-lg md:text-2xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="text-xl md:text-2xl lg:text-3xl font-bold"><?= esc($settings['salon_name']) ?></h3>
+                        <p class="text-gray-400 text-sm md:text-base">Profesyonel Kuaförlük</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12">
+                <div class="text-center md:text-left">
+                    <h4 class="font-bold mb-3 md:mb-4 text-primary-400 text-base md:text-lg">İletişim</h4>
+                    <div class="space-y-2 md:space-y-3">
+                        <p class="text-gray-300 flex items-center justify-center md:justify-start text-sm md:text-base">
+                            <i class="fas fa-map-marker-alt mr-2 md:mr-3 text-accent-400"></i>
+                            <span class="text-center md:text-left"><?= esc($settings['address']) ?></span>
+                        </p>
+                        <p class="text-gray-300 flex items-center justify-center md:justify-start text-sm md:text-base">
+                            <i class="fas fa-phone mr-2 md:mr-3 text-accent-400"></i>
+                            <?= esc($settings['phone']) ?>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <h4 class="font-bold mb-3 md:mb-4 text-primary-400 text-base md:text-lg">Çalışma Saatleri</h4>
+                    <div class="space-y-1 md:space-y-2 text-gray-300">
+                        <p class="font-semibold text-sm md:text-base">Pazartesi - Cumartesi</p>
+                        <p class="text-xl md:text-2xl font-bold text-accent-400">09:00 - 19:00</p>
+                        <p class="text-red-400 text-sm md:text-base">Pazar Kapalı</p>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <h4 class="font-bold mb-3 md:mb-4 text-primary-400 text-base md:text-lg">Sosyal Medya</h4>
+                    <div class="flex justify-center md:justify-end space-x-3 md:space-x-4">
+                        <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl md:rounded-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg touch-button">
+                            <i class="fab fa-instagram text-lg md:text-xl"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg touch-button">
+                            <i class="fab fa-facebook text-lg md:text-xl"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl md:rounded-2xl flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg touch-button">
+                            <i class="fab fa-whatsapp text-lg md:text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-6 md:pt-8 text-center">
+                <p class="text-gray-400 text-sm md:text-base">&copy; 2024 <?= esc($settings['salon_name']) ?>. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Rezervasyon Modal -->
+    <div id="rezervasyonModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-backdrop p-2 md:p-4">
+        <div class="bg-white rounded-2xl md:rounded-3xl shadow-2xl w-full max-w-lg max-h-[95vh] overflow-y-auto relative transform transition-all duration-300 animate-scale-in modal-content">
+            <div class="sticky top-0 bg-white rounded-t-2xl md:rounded-t-3xl border-b border-gray-200 p-4 md:p-6 z-10 modal-header">
+                <div class="flex items-center justify-between mb-3 md:mb-4">
+                    <div class="flex items-center space-x-3 md:space-x-4">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-calendar-plus text-white text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800">Randevu Oluştur</h3>
+                            <p class="text-gray-600 text-sm md:text-base">Adım adım randevunuzu planlayın</p>
+                        </div>
+                    </div>
+                    <button data-modal-hide="rezervasyonModal" class="w-10 h-10 md:w-12 md:h-12 bg-gray-100 hover:bg-gray-200 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 touch-button">
+                        <i class="fas fa-times text-gray-600"></i>
+                    </button>
+                </div>
+                
+                <!-- Desktop Progress Steps -->
+                <div class="hidden md:flex justify-between mb-4">
+                    <div class="flex items-center space-x-2 text-sm">
+                        <div class="step-indicator w-8 h-8 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold">1</div>
+                        <span class="font-semibold text-gray-600">Hizmet</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm">
+                        <div class="step-indicator w-8 h-8 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">2</div>
+                        <span class="font-semibold text-gray-600">Kuaför</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm">
+                        <div class="step-indicator w-8 h-8 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">3</div>
+                        <span class="font-semibold text-gray-600">Tarih</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm">
+                        <div class="step-indicator w-8 h-8 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">4</div>
+                        <span class="font-semibold text-gray-600">Saat</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm">
+                        <div class="step-indicator w-8 h-8 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold">5</div>
+                        <span class="font-semibold text-gray-600">Bilgiler</span>
+                    </div>
+                </div>
+                
+                <!-- Mobile Progress Steps -->
+                <div class="flex md:hidden step-indicators-mobile">
+                    <div class="step-indicator-mobile bg-primary-500 text-white">1</div>
+                    <div class="step-indicator-mobile bg-gray-300 text-gray-600">2</div>
+                    <div class="step-indicator-mobile bg-gray-300 text-gray-600">3</div>
+                    <div class="step-indicator-mobile bg-gray-300 text-gray-600">4</div>
+                    <div class="step-indicator-mobile bg-gray-300 text-gray-600">5</div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div id="progressBar" class="bg-gradient-to-r from-primary-500 to-secondary-500 h-2 rounded-full transition-all duration-500" style="width: 20%"></div>
+                </div>
+            </div>
+
+            <div class="p-4 md:p-6">
+                <?php if (session()->getFlashdata('success')): ?>
+                    <div class="bg-gradient-to-r from-green-400 to-green-600 text-white p-3 md:p-4 mb-4 md:mb-6 rounded-xl md:rounded-2xl shadow-lg animate-fade-in">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2 md:mr-3 text-lg md:text-xl"></i>
+                            <span class="text-sm md:text-base"><?= session('success') ?></span>
+                        </div>
+                    </div>
+                <?php endif ?>
+
+                <?php if (session()->getFlashdata('error')): ?>
+                    <div class="bg-gradient-to-r from-red-400 to-red-600 text-white p-3 md:p-4 mb-4 md:mb-6 rounded-xl md:rounded-2xl shadow-lg animate-fade-in">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2 md:mr-3 text-lg md:text-xl"></i>
+                            <span class="text-sm md:text-base"><?= session('error') ?></span>
+                        </div>
+                    </div>
+                <?php endif ?>
+
+                <form id="reservationForm" action="<?= base_url('home/createReservation') ?>" method="post">
+                    <!-- Step 1: Service Selection -->
+                    <div id="step-1" class="step">
+                        <label class="block text-gray-700 font-bold mb-4 md:mb-6 text-base md:text-lg">Hizmet Seçin</label>
+                        <div id="serviceCards" class="space-y-2 md:space-y-3 max-h-80 md:max-h-96 overflow-y-auto">
+                            <?php foreach ($services as $service): ?>
+                                <button type="button" data-service-id="<?= $service['id'] ?>" class="selection-card w-full flex items-center p-3 md:p-4 rounded-xl md:rounded-2xl border-2 border-gray-200 text-left touch-button">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg md:rounded-xl flex items-center justify-center mr-3 md:mr-4">
+                                        <i class="fas fa-scissors text-white text-sm md:text-base"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="font-bold text-gray-800 text-base md:text-lg"><?= esc($service['name']) ?></p>
+                                        <p class="text-gray-600 text-sm md:text-base"><?= $service['duration_minutes'] ?> dakika</p>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </button>
+                            <?php endforeach ?>
+                        </div>
+                        <input type="hidden" name="service_id" id="serviceInput" required>
+                        <div class="flex justify-end mt-6 md:mt-8">
+                            <button type="button" id="next-1" class="btn-gradient text-white px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold shadow-lg touch-button">
+                                Sonraki <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Barber Selection -->
+                    <div id="step-2" class="step hidden">
+                        <label class="block text-gray-700 font-bold mb-4 md:mb-6 text-base md:text-lg">Kuaför Seçin</label>
+                        <div id="barberCards" class="space-y-2 md:space-y-3 max-h-80 md:max-h-96 overflow-y-auto">
+                            <?php foreach ($barbers as $barber): ?>
+                                <?php if ($barber['is_active']): ?>
+                                    <button type="button" data-barber-id="<?= $barber['id'] ?>" class="selection-card w-full flex items-center p-3 md:p-4 rounded-xl md:rounded-2xl border-2 border-gray-200 text-left touch-button">
+                                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg md:rounded-xl flex items-center justify-center mr-3 md:mr-4">
+                                            <i class="fas fa-user-tie text-white text-sm md:text-base"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="font-bold text-gray-800 text-base md:text-lg"><?= esc($barber['name']) ?></p>
+                                            <p class="text-gray-600 text-sm md:text-base">Uzman Kuaför</p>
+                                        </div>
+                                        <i class="fas fa-chevron-right text-gray-400"></i>
+                                    </button>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        </div>
+                        <input type="hidden" name="barber_id" id="barberInput" required>
+                        <div class="flex justify-between mt-6 md:mt-8">
+                            <button type="button" id="back-2" class="bg-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold hover:bg-gray-300 transition-all duration-300 touch-button">
+                                <i class="fas fa-arrow-left mr-2"></i> Geri
+                            </button>
+                            <button type="button" id="next-2" class="btn-gradient text-white px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold shadow-lg touch-button">
+                                Sonraki <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Date Selection -->
+                    <div id="step-3" class="step hidden">
+                        <label class="block text-gray-700 font-bold mb-4 md:mb-6 text-base md:text-lg">Tarih Seçin</label>
+                        <div id="dateButtons" class="grid grid-cols-2 gap-2 md:gap-3"></div>
+                        <input type="hidden" name="date" id="dateInput" required>
+                        <div class="flex justify-between mt-6 md:mt-8">
+                            <button type="button" id="back-3" class="bg-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold hover:bg-gray-300 transition-all duration-300 touch-button">
+                                <i class="fas fa-arrow-left mr-2"></i> Geri
+                            </button>
+                            <button type="button" id="next-3" class="btn-gradient text-white px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold shadow-lg touch-button">
+                                Sonraki <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Time Selection -->
+                    <div id="step-4" class="step hidden">
+                        <label class="block text-gray-700 font-bold mb-4 md:mb-6 text-base md:text-lg">Saat Seçin</label>
+                        <div id="timeButtons" class="grid grid-cols-2 gap-2 md:gap-3"></div>
+                        <input type="hidden" name="start_time" id="startTimeInput" required>
+                        <div class="flex justify-between mt-6 md:mt-8">
+                            <button type="button" id="back-4" class="bg-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold hover:bg-gray-300 transition-all duration-300 touch-button">
+                                <i class="fas fa-arrow-left mr-2"></i> Geri
+                            </button>
+                            <button type="button" id="next-4" class="btn-gradient text-white px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold shadow-lg touch-button">
+                                Sonraki <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Customer Information -->
+                    <div id="step-5" class="step hidden">
+                        <label class="block text-gray-700 font-bold mb-4 md:mb-6 text-base md:text-lg">Bilgilerinizi Girin</label>
+                        <div class="space-y-3 md:space-y-4">
+                            <div class="relative">
+                                <i class="fas fa-user absolute left-3 md:left-4 top-3 md:top-4 text-gray-400"></i>
+                                <input type="text" name="customer_name" placeholder="Ad Soyad" required
+                                    class="mobile-input w-full pl-10 md:pl-12 pr-3 md:pr-4 py-3 md:py-4 border-2 border-gray-200 rounded-xl md:rounded-2xl focus:border-primary-500 focus:ring-4 focus:ring-primary-200 transition-all duration-300 text-base md:text-lg">
+                            </div>
+                            <div class="relative">
+                                <i class="fas fa-phone absolute left-3 md:left-4 top-3 md:top-4 text-gray-400"></i>
+                                <input type="tel" name="customer_phone" placeholder="Telefon" required
+                                    class="mobile-input w-full pl-10 md:pl-12 pr-3 md:pr-4 py-3 md:py-4 border-2 border-gray-200 rounded-xl md:rounded-2xl focus:border-primary-500 focus:ring-4 focus:ring-primary-200 transition-all duration-300 text-base md:text-lg">
+                            </div>
+                            <div class="relative">
+                                <i class="fas fa-comment absolute left-3 md:left-4 top-3 md:top-4 text-gray-400"></i>
+                                <textarea name="customer_note" placeholder="Not (isteğe bağlı)" rows="3"
+                                    class="mobile-input w-full pl-10 md:pl-12 pr-3 md:pr-4 py-3 md:py-4 border-2 border-gray-200 rounded-xl md:rounded-2xl focus:border-primary-500 focus:ring-4 focus:ring-primary-200 transition-all duration-300 text-base md:text-lg resize-none"></textarea>
+                            </div>
+                        </div>
+                        <div class="flex justify-between mt-6 md:mt-8">
+                            <button type="button" id="back-5" class="bg-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold hover:bg-gray-300 transition-all duration-300 touch-button">
+                                <i class="fas fa-arrow-left mr-2"></i> Geri
+                            </button>
+                            <button type="submit" class="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 md:px-10 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold shadow-lg hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 touch-button">
+                                <i class="fas fa-calendar-check mr-2 md:mr-3"></i> Randevu Oluştur
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sorgulama Modal - Mobile Optimized -->
+    <div id="sorguModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 modal-backdrop">
+        <!-- Mobile Modal -->
+        <div class="mobile-modal md:hidden">
+            <div class="mobile-modal-content">
+                <div class="p-4 border-b border-gray-200 bg-white sticky top-0">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <i class="fas fa-search text-xl text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Randevu Sorgula</h3>
+                                <p class="text-sm text-gray-600">Randevu kodunu girin</p>
+                            </div>
+                        </div>
+                        <button data-modal-hide="sorguModal" class="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-xl flex items-center justify-center transition-all duration-300 touch-button">
+                            <i class="fas fa-times text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-4 flex-1 overflow-y-auto">
+                    <form id="sorgulamaFormMobile">
+                        <div class="relative mb-6">
+                            <i class="fas fa-barcode absolute left-3 top-3 text-gray-400"></i>
+                            <input type="text" name="reservation_code" placeholder="Randevu Kodu" required
+                                class="mobile-input w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-200 transition-all duration-300 text-base">
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            <button type="submit"
+                                class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3.5 rounded-xl font-bold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 shadow-lg touch-button">
+                                <i class="fas fa-search mr-2"></i>
+                                Sorgula
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="sorguSonucuMobile" class="mt-6 hidden">
+                        <div class="query-result-mobile">
+                            <div id="sonucDetayMobile" class="space-y-3"></div>
+                            <button id="iptalButonuMobile"
+                                class="mt-4 w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-xl font-bold hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg hidden touch-button">
+                                <i class="fas fa-times-circle mr-2"></i>
+                                Randevuyu İptal Et
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Modal -->
+        <div class="hidden md:flex items-center justify-center p-4 min-h-screen">
+            <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md relative transform transition-all duration-300 animate-scale-in">
+                <div class="p-8">
+                    <div class="text-center mb-8">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl mb-6 shadow-xl">
+                            <i class="fas fa-search text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-800 mb-2">Randevu Sorgulama</h3>
+                        <p class="text-gray-600">Randevu kodunuzu girerek durumunu öğrenin</p>
+                    </div>
+
+                    <form id="sorgulamaFormDesktop">
+                        <div class="relative mb-8">
+                            <i class="fas fa-barcode absolute left-4 top-4 text-gray-400"></i>
+                            <input type="text" name="reservation_code" placeholder="Randevu Kodu" required
+                                class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-2xl focus:border-emerald-500 focus:ring-4 focus:ring-emerald-200 transition-all duration-300 text-lg">
+                        </div>
+
+                        <div class="flex flex-col gap-4">
+                            <button type="submit"
+                                class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-2xl font-bold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                <i class="fas fa-search mr-2"></i>
+                                Sorgula
+                            </button>
+                            <button type="button" data-modal-hide="sorguModal"
+                                class="w-full bg-gray-200 text-gray-800 px-8 py-4 rounded-2xl font-bold hover:bg-gray-300 transition-all duration-300">
+                                <i class="fas fa-times mr-2"></i>
+                                Kapat
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="sorguSonucuDesktop" class="mt-8 hidden">
+                        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6 border-l-4 border-emerald-500">
+                            <div id="sonucDetayDesktop" class="space-y-3"></div>
+                            <button id="iptalButonuDesktop"
+                                class="mt-6 w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-xl font-bold hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg hidden">
+                                <i class="fas fa-times-circle mr-2"></i>
+                                Randevuyu İptal Et
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AJAX Scripts -->
+    <script>
+        // Step Navigation and Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.step');
+            const progressBar = document.getElementById('progressBar');
+            const stepIndicators = document.querySelectorAll('.step-indicator');
+            const stepIndicatorsMobile = document.querySelectorAll('.step-indicator-mobile');
+            let currentStep = 1;
+
+            function showStep(stepNumber) {
+                steps.forEach((step, index) => {
+                    if (index + 1 === stepNumber) {
+                        step.classList.remove('hidden');
+                    } else {
+                        step.classList.add('hidden');
+                    }
+                });
+                
+                // Update progress bar
+                progressBar.style.width = `${(stepNumber / 5) * 100}%`;
+                
+                // Update desktop step indicators
+                stepIndicators.forEach((indicator, index) => {
+                    if (index + 1 <= stepNumber) {
+                        indicator.classList.add('active');
+                        indicator.classList.remove('bg-gray-300', 'text-gray-600');
+                        indicator.classList.add('bg-gradient-to-br', 'from-primary-500', 'to-secondary-500', 'text-white');
+                    } else {
+                        indicator.classList.remove('active');
+                        indicator.classList.add('bg-gray-300', 'text-gray-600');
+                        indicator.classList.remove('bg-gradient-to-br', 'from-primary-500', 'to-secondary-500', 'text-white');
+                    }
+                });
+
+                // Update mobile step indicators
+                stepIndicatorsMobile.forEach((indicator, index) => {
+                    if (index + 1 <= stepNumber) {
+                        indicator.classList.remove('bg-gray-300', 'text-gray-600');
+                        indicator.classList.add('bg-primary-500', 'text-white');
+                    } else {
+                        indicator.classList.add('bg-gray-300', 'text-gray-600');
+                        indicator.classList.remove('bg-primary-500', 'text-white');
+                    }
+                });
+            }
+
+            function validateStep(stepNumber) {
+                const input = steps[stepNumber - 1].querySelector('input[required]');
+                return input && input.value;
+            }
+
+            // Service Selection
+            const serviceCards = document.querySelectorAll('#serviceCards button');
+            const serviceInput = document.getElementById('serviceInput');
+            serviceCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    serviceInput.value = card.dataset.serviceId;
+                    serviceCards.forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                });
+            });
+
+            document.getElementById('next-1').addEventListener('click', () => {
+                if (validateStep(1)) {
+                    currentStep = 2;
+                    showStep(currentStep);
+                }
+            });
+
+            // Barber Selection
+            const barberCards = document.querySelectorAll('#barberCards button');
+            const barberInput = document.getElementById('barberInput');
+            barberCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    barberInput.value = card.dataset.barberId;
+                    barberCards.forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                });
+            });
+
+            document.getElementById('next-2').addEventListener('click', () => {
+                if (validateStep(2)) {
+                    currentStep = 3;
+                    showStep(currentStep);
+                    generateDateButtons();
+                }
+            });
+
+            document.getElementById('back-2').addEventListener('click', () => {
+                currentStep = 1;
+                showStep(currentStep);
+            });
+
+            // Date Selection
+            const dateInput = document.getElementById('dateInput');
+            function generateDateButtons() {
+                const dateButtons = document.getElementById('dateButtons');
+                dateButtons.innerHTML = '';
+                const today = new Date();
+                const days = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
+                const months = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date(today);
+                    date.setDate(today.getDate() + i);
+                    const yyyy = date.getFullYear();
+                    const mm = String(date.getMonth() + 1).padStart(2, '0');
+                    const dd = String(date.getDate()).padStart(2, '0');
+                    const formattedDate = `${yyyy}-${mm}-${dd}`;
+                    const dayName = days[date.getDay()];
+                    const monthName = months[date.getMonth()];
+
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.dataset.date = formattedDate;
+                    button.classList.add('selection-card', 'p-3', 'md:p-4', 'rounded-xl', 'md:rounded-2xl', 'border-2', 'border-gray-200', 'text-center', 'font-bold', 'touch-button');
+                    button.innerHTML = `
+                        <div class="text-base md:text-lg">${dayName}</div>
+                        <div class="text-xl md:text-2xl">${dd}</div>
+                        <div class="text-sm text-gray-600">${monthName}</div>
+                    `;
+                    
+                    if (dayName === 'Paz') {
+                        button.classList.add('bg-gray-200', 'cursor-not-allowed', 'opacity-50');
+                        button.disabled = true;
+                    }
+                    
+                    dateButtons.appendChild(button);
+
+                    button.addEventListener('click', () => {
+                        if (!button.disabled) {
+                            dateInput.value = formattedDate;
+                            dateButtons.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+                            button.classList.add('selected');
+                        }
+                    });
+                }
+            }
+
+            document.getElementById('next-3').addEventListener('click', () => {
+                if (validateStep(3)) {
+                    loadAvailableHours();
+                    currentStep = 4;
+                    showStep(currentStep);
+                }
+            });
+
+            document.getElementById('back-3').addEventListener('click', () => {
+                currentStep = 2;
+                showStep(currentStep);
+            });
+
+            // Time Selection
+            document.getElementById('next-4').addEventListener('click', () => {
+                if (validateStep(4)) {
+                    currentStep = 5;
+                    showStep(currentStep);
+                }
+            });
+
+            document.getElementById('back-4').addEventListener('click', () => {
+                currentStep = 3;
+                showStep(currentStep);
+            });
+
+            document.getElementById('back-5').addEventListener('click', () => {
+                currentStep = 4;
+                showStep(currentStep);
+            });
+
+            // Available hours script
+            const timeButtons = document.getElementById('timeButtons');
+            const startTimeInput = document.getElementById('startTimeInput');
+
+            function loadAvailableHours() {
+                const barberId = barberInput.value;
+                const date = dateInput.value;
+                const serviceId = serviceInput.value;
+
+                if (!barberId || !date || !serviceId) return;
+
+                fetch(`<?= base_url('home/availableHours') ?>?barber_id=${barberId}&date=${date}&service_id=${serviceId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        timeButtons.innerHTML = '';
+
+                        if (!data.all || data.all.length === 0) {
+                            timeButtons.innerHTML = '<p class="col-span-2 text-gray-600 text-center py-8">Bu tarih için uygun saat bulunmuyor</p>';
+                            return;
+                        }
+
+                        data.all.forEach(hour => {
+                            const button = document.createElement('button');
+                            button.type = 'button';
+                            button.textContent = hour;
+                            button.classList.add('p-3', 'md:p-4', 'rounded-xl', 'md:rounded-2xl', 'font-bold', 'transition-all', 'duration-300', 'transform', 'hover:scale-105', 'touch-button');
+                            
+                            if (data.busy.includes(hour)) {
+                                button.classList.add('bg-red-500', 'text-white', 'cursor-not-allowed', 'opacity-50');
+                                button.disabled = true;
+                            } else {
+                                button.classList.add('bg-green-500', 'text-white', 'hover:bg-green-600', 'selection-card');
+                                button.addEventListener('click', () => {
+                                    startTimeInput.value = hour;
+                                    timeButtons.querySelectorAll('button:not([disabled])').forEach(btn => btn.classList.remove('selected'));
+                                    button.classList.add('selected');
+                                });
+                            }
+                            timeButtons.appendChild(button);
+                        });
+                    });
+            }
+
+            // Form validation before submission
+            document.getElementById('reservationForm').addEventListener('submit', (e) => {
+                const requiredInputs = document.querySelectorAll('#reservationForm input[required]');
+                for (let input of requiredInputs) {
+                    if (!input.value) {
+                        e.preventDefault();
+                        alert('Lütfen tüm gerekli alanları doldurun.');
+                        return;
+                    }
+                }
+            });
+        });
+
+        // Enhanced appointment query script for both mobile and desktop
+        const formMobile = document.getElementById('sorgulamaFormMobile');
+        const formDesktop = document.getElementById('sorgulamaFormDesktop');
+        const sonucDivMobile = document.getElementById('sorguSonucuMobile');
+        const sonucDivDesktop = document.getElementById('sorguSonucuDesktop');
+        const detayDivMobile = document.getElementById('sonucDetayMobile');
+        const detayDivDesktop = document.getElementById('sonucDetayDesktop');
+        const iptalBtnMobile = document.getElementById('iptalButonuMobile');
+        const iptalBtnDesktop = document.getElementById('iptalButonuDesktop');
+        let aktifKod = '';
+
+        async function handleQuery(e, isMobile) {
+            e.preventDefault();
+            const kod = e.target.reservation_code.value;
+            aktifKod = kod;
+
+            const res = await fetch('<?= base_url('ajax/check-reservation') ?>', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'code=' + encodeURIComponent(kod)
+            });
+
+            const data = await res.json();
+            
+            const sonucDiv = isMobile ? sonucDivMobile : sonucDivDesktop;
+            const detayDiv = isMobile ? detayDivMobile : detayDivDesktop;
+            const iptalBtn = isMobile ? iptalBtnMobile : iptalBtnDesktop;
+            
+            sonucDiv.classList.remove('hidden');
+
+            if (!data.success) {
+                detayDiv.innerHTML = `
+                    <div class="flex items-center text-red-600 font-semibold p-4 bg-red-50 rounded-xl">
+                        <i class="fas fa-exclamation-circle mr-3 text-xl"></i>
+                        <span>${data.message}</span>
+                    </div>
+                `;
+                iptalBtn.classList.add('hidden');
+                return;
+            }
+
+            const r = data.data;
+            const statusColors = {
+                'pending': 'text-yellow-700 bg-yellow-100',
+                'confirmed': 'text-green-700 bg-green-100',
+                'completed': 'text-blue-700 bg-blue-100',
+                'cancelled': 'text-red-700 bg-red-100'
+            };
+
+            const statusTexts = {
+                'pending': 'Bekliyor',
+                'confirmed': 'Onaylandı',
+                'completed': 'Tamamlandı',
+                'cancelled': 'İptal Edildi'
+            };
+
+            const statusColor = statusColors[r.status] || 'text-gray-700 bg-gray-100';
+            const now = new Date();
+            const appointmentDate = new Date(r.date + ' ' + r.start_time);
+            const canCancel = r.status === 'pending' && appointmentDate > now;
+
+            const resultHTML = `
+                <div class="space-y-3">
+                    <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                        <i class="fas fa-user w-6 text-primary-500 mr-3"></i>
+                        <div class="flex-1">
+                            <span class="font-semibold text-gray-700 text-sm">Ad:</span>
+                            <span class="ml-2 font-bold">${r.customer_name}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                        <i class="fas fa-scissors w-6 text-primary-500 mr-3"></i>
+                        <div class="flex-1">
+                            <span class="font-semibold text-gray-700 text-sm">Hizmet:</span>
+                            <span class="ml-2 font-bold">${r.service_name}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                        <i class="fas fa-user-tie w-6 text-primary-500 mr-3"></i>
+                        <div class="flex-1">
+                            <span class="font-semibold text-gray-700 text-sm">Kuaför:</span>
+                            <span class="ml-2 font-bold">${r.barber_name}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                        <i class="fas fa-calendar-alt w-6 text-primary-500 mr-3"></i>
+                        <div class="flex-1">
+                            <span class="font-semibold text-gray-700 text-sm">Tarih:</span>
+                            <span class="ml-2 font-bold">${r.date} ${r.start_time}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white rounded-xl shadow-sm">
+                        <i class="fas fa-info-circle w-6 text-primary-500 mr-3"></i>
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-gray-700 text-sm">Durum:</span>
+                            <span class="status-badge ${statusColor}">${statusTexts[r.status] || r.status.toUpperCase()}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            detayDiv.innerHTML = resultHTML;
+
+            if (canCancel) {
+                iptalBtn.classList.remove('hidden');
+            } else {
+                iptalBtn.classList.add('hidden');
+            }
+        }
+
+        if (formMobile) {
+            formMobile.addEventListener('submit', (e) => handleQuery(e, true));
+        }
+
+        if (formDesktop) {
+            formDesktop.addEventListener('submit', (e) => handleQuery(e, false));
+        }
+
+        async function handleCancel(isMobile) {
+            if (!confirm('Randevuyu iptal etmek istediğinize emin misiniz?')) return;
+
+            const res = await fetch('<?= base_url('ajax/cancel-reservation') ?>', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'code=' + encodeURIComponent(aktifKod)
+            });
+
+            const data = await res.json();
+            const detayDiv = isMobile ? detayDivMobile : detayDivDesktop;
+            const iptalBtn = isMobile ? iptalBtnMobile : iptalBtnDesktop;
+            
+            if (data.success) {
+                detayDiv.innerHTML += `
+                    <div class="flex items-center text-green-600 mt-4 p-4 bg-green-50 rounded-xl font-semibold shadow-sm">
+                        <i class="fas fa-check-circle mr-3 text-xl"></i>
+                        <span>Randevu başarıyla iptal edildi.</span>
+                    </div>
+                `;
+                iptalBtn.classList.add('hidden');
+            } else {
+                alert(data.message || 'Bir hata oluştu');
+            }
+        }
+
+        if (iptalBtnMobile) {
+            iptalBtnMobile.addEventListener('click', () => handleCancel(true));
+        }
+
+        if (iptalBtnDesktop) {
+            iptalBtnDesktop.addEventListener('click', () => handleCancel(false));
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Auto-open reservation modal if there are flash messages
+        <?php if (session()->getFlashdata('success') || session()->getFlashdata('error')): ?>
+            document.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById('rezervasyonModal');
+                if (modal && typeof Modal !== 'undefined') {
+                    const modalInstance = new Modal(modal);
+                    modalInstance.show();
+                }
+            });
+        <?php endif ?>
+
+        // Enhanced parallax effect with mobile consideration
+        let ticking = false;
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.gradient-bg');
+            if (parallax && window.innerWidth > 768) {
+                const speed = scrolled * 0.3;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        });
+
+        // Touch event improvements for mobile
+        document.addEventListener('touchstart', function() {}, { passive: true });
+        document.addEventListener('touchmove', function() {}, { passive: true });
+
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Viewport height fix for mobile browsers
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
+    </script>
+
+</body>
+
+</html>
